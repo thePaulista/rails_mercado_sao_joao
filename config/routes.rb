@@ -1,57 +1,21 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
+  #Api definition
+  namespace :api, defaults: { format: :json }, constraints: { subdomain: "api" }, path: "/" do
+    scope module: :v1 do
+      #list the resources here
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
+    end
+  end
 end
+
+
+#rails can handle up to 21 different media types, you can list them by accessing the SET class under the MIME module.
+#
+#the JSON is one of the built0oin MIME types accepted by Rails, so we need to spicify this format as the default one
+#
+#up to this point we have not made anything crazy, what we want to achieve next is how to generate a base_uri under a subdomain, in our case something like api.market_place_api.dev.
+#
+#Setting the api under a subdomain is a good practie because it allows to escalate the applicatio to a DNS level.
+#
+#didn't just add a constrainst hash to spicity the subdomain, but also add the path option, and set it a backslash. this is telling rails to set the starting path for each request to be root in relation to the subdomain.
