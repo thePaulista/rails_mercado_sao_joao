@@ -17,9 +17,10 @@ Bundler.require(*Rails.groups)
 
 module MarketPlaceApi
   class Application < Rails::Application
+    #don't generate RSpec tests for views and helpers
     config.generators do |g|
       g.test_framework :rspec, fixture: true
-      g.fixture_replacement :factory_girl, dir: 'spec/ factories'
+      g.fixture_replacement :factory_girl, dir: 'spec/factories'
       g.view_specs false
       g.helper_specs false
       g.stylesheets = false
@@ -27,8 +28,9 @@ module MarketPlaceApi
       g.helper = false
     end
 
-   config.autoload_paths += %W(\#{config.root}/lib)
+    config.autoload_paths += %W(\#{config.root}/lib)
 
-   config.active_record.raise_in_transactional_callbacks = true
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
+
