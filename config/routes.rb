@@ -8,10 +8,15 @@ MarketPlaceApi::Application.routes.draw do
     scope module: :v1,
       constraints: ApiConstraints.new(version: 1, default: true) do
       # We are going to list our resources here
-      resources :users, :only => [:show]
+      resources :users, :only => [:show, :create, :update, :destroy]
     end
   end
 end
+
+
+
+#
+#
 #rails can handle up to 21 different media types, you can list them by accessing the SET class under the MIME module.
 #
 #the JSON is one of the built0oin MIME types accepted by Rails, so we need to spicify this format as the default one
